@@ -1,38 +1,33 @@
 let apiKey = 'siMvzuSP0NkMW22QSs2zlgo1wlXs1FDOb6ZVOzkp';
 let rankingList = document.getElementById('ranking');
+let rankingUrl = `https://api.api-tennis.com/tennis/?method=get_rankings&APIkey=${apiKey}&rank_type=ATP`;
 
-// URL con parámetro rank_type=ATP
-let url = `https://api.api-tennis.com/tennis/?method=get_rankings&APIkey=${apiKey}&rank_type=ATP`;
-
-fetch(url)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Error en la respuesta de la API: " + response.status);
-    }
-    return response.json();
-  })
+fetch(rankingUrl)
+  .then(response => response.json())
   .then(data => {
-    console.log("Datos de la API:", data); // Esto te permite ver exactamente qué devuelve
-
-    if (data.success === 1 && data.result && data.result.length > 0) {
-      let atpRanking = data.result[0].players;
-
-      // Creamos elementos <li> para cada jugador y los agregamos al <ul>
-      atpRanking.slice(0, 10).forEach(player => {
-        let li = document.createElement("li");
-        li.textContent = `${player.ranking}. ${player.player} (${player.country_code})`;
-        rankingList.appendChild(li);
-      });
-    } else {
-      // No agregamos nada si no hay datos, pero la API falló
-      let li = document.createElement("li");
-      li.textContent = "La API no devolvió datos.";
-      rankingList.appendChild(li);
-    }
+    let rankings = data.rankings || [];
+    rankingList.innerHTML = '';
+    rankings.slice(0, 10).forEach(player => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${player.rank}. ${player.player_name} - Puntos: ${player.points}`;
+      rankingList.appendChild(listItem);
+    });
   })
-  .catch(error => {
-    console.error("Hubo un problema con la petición:", error);
-    let li = document.createElement("li");
-    li.textContent = "Error al conectar con la API.";
-    rankingList.appendChild(li);
-  });
+  .catch(error => console.error('Error al obtener los rankings:', error));
+
+
+let eventsUrl = `https://api.api-tennis.com/tennis/?method=get_events&APIkey=${apiKey}`;
+
+fetch(eventsUrl)
+  .then(response => response.json())
+  .then(data => {
+    let events = data.events || [];
+    let eventsList = document.getElementById('events');
+    eventsList.innerHTML = '';
+    events.forEach(event => {
+      const eventItem = document.createElement('li');
+      eventItem.textContent = `${event.name} - Fecha: ${event.date}`;
+      eventsList.appendChild(eventItem);
+    });
+  })
+  .catch(error => console.error('Error al obtener los eventos:', error));
