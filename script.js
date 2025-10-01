@@ -26,13 +26,13 @@ fetch(url)
     } else {
       // No agregamos nada si no hay datos, pero la API falló
       let li = document.createElement("li");
-      li.textContent = "⚠️ La API no devolvió datos.";
+      li.textContent = "La API no devolvió datos.";
       rankingList.appendChild(li);
     }
   })
   .catch(error => {
     console.error("Hubo un problema con la petición:", error);
     let li = document.createElement("li");
-    li.textContent = "⚠️ Error al conectar con la API.";
+    li.textContent = "Error al conectar con la API.";
     rankingList.appendChild(li);
   });
