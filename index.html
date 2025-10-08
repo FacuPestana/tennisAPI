@@ -1,26 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <title>Tenis API</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta API OpenF1</title>
 </head>
 <body>
-  <div id="conteiner">
-     <h1>Ranking ATP</h1>
-     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis sit optio laboriosam libero fugiat iste quos consequatur ab veniam aspernatur repellendus aliquid nihil non repellat, placeat et cum. Odit, ea.
-       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non accusamus facere voluptatum qui perferendis sapiente labore rem amet assumenda! Nobis itaque quasi eligendi? In, accusantium! Tenetur repudiandae voluptatum aperiam libero Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, consequatur aut. Mollitia sed nobis quibusdam eius quod perspiciatis eos. Tenetur accusantium odit veniam alias distinctio enim harum debitis velit itaque.
-       
-     </p>
-  <ul id="ranking"></ul>
 
-  <h1>Eventos de Tenis</h1>
-  <ul id="events"></ul>
-  </div>
- 
+    <h1>Datos del conductor de F1</h1>
+    <div id="driver-info">
+        <!-- Aquí se mostrará la información del conductor -->
+    </div>
 
-  <script src="script.js"></script>
+    <script>
+        let div = document.querySelector('#driver-info');
+        let url = 'https://api.openf1.org/v1/drivers?driver_number=1&session_key=9158';
+
+        // Realizamos la solicitud a la API usando fetch
+        fetch(url)
+            .then(response => {
+                // Verificamos si la respuesta es exitosa (código 200)
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos');
+                }
+                return response.json();  // Convertimos la respuesta en formato JSON
+            })
+            .then(data => {
+                // Aquí podemos procesar la información que nos devuelve la API
+                console.log(data); // Puedes ver los datos en la consola
+                const driverInfo = `
+                    <h2>Conductor: ${data.name}</h2>
+                    <p>Equipo: ${data.team}</p>
+                    <p>Posición: ${data.position}</p>
+                    <p>Fecha de nacimiento: ${data.date_of_birth}</p>
+                    <p>País: ${data.nationality}</p>
+                    <p>Fecha de debut: ${data.debut}</p>
+                `;
+                div.innerHTML = driverInfo; // Mostrar en el HTML
+            })
+            .catch(error => {
+                console.error('Hubo un problema con la solicitud:', error);
+                div.innerHTML = '<p>Hubo un error al cargar los datos.</p>';
+            });
+    </script>
+
 </body>
 </html>

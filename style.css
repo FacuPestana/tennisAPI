@@ -1,54 +1,34 @@
 body {
-    background-color: #63e8e9; /* Fondo atractivo y moderno */
-    color: #333;
-    text-align: center;
-    font-family: cursive; /* Fuente cursiva para todo el contenido */
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
     margin: 0;
-    padding: 0;
-    height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
-    display: flex; /* Flexbox para centrar solo en el eje X */
-    justify-content: center; /* Centra el contenedor horizontalmente */
-}
-
-h1 {
-    color: #2b2b2b; /* Un color oscuro para los títulos */
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-#conteiner {
-    background-color: #ffffff;
-    width: 300px; /* Aumento el tamaño del contenedor para que los textos se acomoden mejor */
     padding: 20px;
-    border-radius: 15px; /* Bordes redondeados para un toque más moderno */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para el contenedor */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra los elementos dentro del contenedor */
-    justify-content: center;
-    margin-top: 50px; /* Ajuste de espacio desde la parte superior */
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 1.1rem;
-    color: #4a4a4a;
+#app {
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-li {
-    margin: 10px 0;
-    font-weight: bold;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-a {
-    text-decoration: none;
-    color: #009688; /* Un color verde suave para los enlaces */
-    font-weight: normal;
+table, th, td {
+    border: 1px solid #ddd;
 }
 
-a:hover {
-    color: #00796b; /* Cambia a un tono más oscuro cuando el enlace se pasa por encima */
-    text-decoration: underline;
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f1f1f1;
 }
